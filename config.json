@@ -1,0 +1,67 @@
+{
+
+    "cvae_model_path": "PointCVAE/model.pth",
+    "dcog_config":
+    {
+        "mano_path": "mano/models/MANO_RIGHT.pkl",
+        "init_handpose_path": "DCoG/init_handpose.npy",
+        "init_quat_path": "DCoG/init_quat.npy",
+        "finger_index_path": "HandAnnotation/finger_index.json",
+        "tip_index_path": "HandAnnotation/tip_index.json",
+        "supnet_path": "SupNet/model.pth",
+        "init_move_finger_idx":3,
+        "weights":
+        {
+            "w_dis": 0.5,
+            "w_dct": 0.8,
+            "w_dcf": 0.6,
+            "w_net": 0.6,
+            "w_pen": 10.0
+        }
+    },
+
+    "obman_config":
+    {
+        "mode": "test",
+        "shapeNet_path": "Data/ShapeNetCore.v2.zip",
+        "obman_path": "Data/obman",
+        "K":50,
+        "sample_points_num": 3000,
+        "save_path": "Data/processed"        
+    },
+
+    "cvae_config":
+    {
+        "seed": 0,
+        "epochs": 200,
+        "batch_size": 100,
+        "learning_rate": 0.0005,
+        "print_every": 1,
+        "use_cuda": 1,
+        "save_interval": 5,
+        "dataloader_workers": 10,
+        "train_mode": "TrainVal",
+        "encoder_layer_sizes": [512, 512, 256],
+        "decoder_layer_sizes": [512, 256, 128, 64, 6],
+        "latent_size": 1024,
+        "cls_num": 6,
+        "emb_dim": 64,
+        "model_type": "point_cvae_net",
+        "loss_weight": [0.5, 0.9, 0.01, 0.4] 
+    },
+
+    "supnet_config":
+    {
+        "seed": 0,
+        "epochs": 100,
+        "batch_size": 128,
+        "learning_rate": 0.0001,
+        "print_every": 20,
+        "use_cuda": 1,
+        "dataloader_workers": 10,
+        "train_mode": "TrainVal",
+        "model_type": "supervision_net"
+    }
+
+
+}
