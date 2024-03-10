@@ -12,8 +12,7 @@ trimesh==4.1.7
 attrdict==2.0.1
 ```
 
-```mano```:  The version of ```MANO``` slightly different from [the one provided by Omid Taheri](https://github.com/otaheri/MANO), please use the version we provide.  
-You should download the MANO model files from [MANO](http://mano.is.tue.mpg.de/) website. Then put ```MANO_RIGHT.pkl``` into ```mano/models/``` in this project directory. This path is also customized in [here](config.json#6).
+```mano```:  The version of ```MANO``` slightly different from [the one provided by Omid Taheri](https://github.com/otaheri/MANO), please use the version we provide. You should download the MANO model files from [MANO](http://mano.is.tue.mpg.de/) website. Then put ```MANO_RIGHT.pkl``` into ```mano/models/``` in this project directory. This path is also customized in [here](config.json#6).
 
 ```pytorch3d```: The installation of pytorch3d can be found in [pytorch3d](https://github.com/facebookresearch/pytorch3d).
 
