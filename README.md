@@ -22,7 +22,7 @@ python run_complete.py -i=3 -s=1234
 ```
 Maybe you will see the following results:
 
-<img src=".imgs/complete_3_pc.png" alt="complete" width="200" height="200"/><img src=".imgs/complete_3_mesh.png" alt="complete" width="200" height="200"/>
+<img src=".imgs/complete_3_mesh.png" alt="complete" width="200" height="200"/><img src=".imgs/complete_3_pc.png" alt="complete" width="200" height="200"/>
 
 
 ```Python
