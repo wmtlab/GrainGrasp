@@ -30,7 +30,7 @@ python run_only_opt.py -i=2 -s=134
 ```
 Maybe you will see the following results:
 
-<img src=".imgs/only_2_pc.png" alt="complete" width="200" height="300"/><img src=".imgs/only_2_mesh.png" alt="complete" width="200" height="300"/>
+<img src=".imgs/only_2_pc.png" alt="complete" width="220" height="300"/><img src=".imgs/only_2_mesh.png" alt="complete" width="220" height="300"/>
 
 **Note: due to the randomness, different results may be generated. The images are for reference only.**
 
