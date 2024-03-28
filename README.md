@@ -43,7 +43,7 @@ Place the ```obman``` directory after decompression and the compressed
 
 The data processing part can be found in [dataprocess.py](dataprocess.py). We recommend incorporating the point cloud sampling steps into the training process rather than setting them before training, better training methods will generate better results.
 
-## Config
+## Configurations
 The configurations for the experiments can be found and modified in [config.json](config.json).
 
 
