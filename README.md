@@ -41,7 +41,7 @@ Maybe you will see the following results:
 If you intend to retrain the model, please download the [obman dataset](https://www.di.ens.fr/willow/research/obman/data/) and [ShapeNetCore.v2](https://shapenet.org/), and then set their paths in the code.
 
 Place the ```obman``` directory after decompression and the compressed
-```ShapeNetCore.v2.zip``` file in the ```Data``` directory. These paths are customized in [here](config.json#L26-L27).
+```ShapeNetCore.v2.zip``` file in the ```Data``` directory (You need create it manually). These paths are customized in [here](config.json#L26-L27).
 
 The data processing part can be found in [dataprocess.py](dataprocess.py). We recommend incorporating the point cloud sampling steps into the training process rather than setting them before training, better training methods will generate better results.
 
