@@ -57,9 +57,7 @@ class DCoGModel:
         init_tran = init_tran * torch.tensor([[1.2, 1.2, 1.2]]).to(self.device)
         init_tran = torch.autograd.Variable(init_tran, requires_grad=True)
         quat_rt = torch.autograd.Variable(
-            torch.Tensor([[1, 0, 0, 0, 0, 0, 0]])
-            .repeat(init_tran.shape[0], 1)
-            .to(self.device),
+            torch.Tensor([[1, 0, 0, 0, 0, 0, 0]]).repeat(init_tran.shape[0], 1).to(self.device),
             requires_grad=True,
         )
         init_quat = torch.autograd.Variable(self.init_quat, requires_grad=True)
@@ -83,8 +81,7 @@ class DCoGModel:
             E_pen = self.cal_Epen(obj_pc, hand_pc_opt)
             E = (
                 (epoch + 1) * self.weights.w_dis * E_dis
-                + max(0, epochs - epoch)
-                * (self.weights.w_dct * E_dct + self.weights.w_dcf * E_dcf)
+                + max(0, epochs - epoch) * (self.weights.w_dct * E_dct + self.weights.w_dcf * E_dcf)
                 + self.weights.w_net * E_net
                 + self.weights.w_pen * E_pen
             )
@@ -119,9 +116,7 @@ class DCoGModel:
                 batch_size=6,
                 flat_hand_mean=True,
             ).to(self.device)
-            rh_faces = (
-                torch.tensor(rh_mano.faces.astype(int)).unsqueeze(0).to(self.device)
-            )
+            rh_faces = torch.tensor(rh_mano.faces.astype(int)).unsqueeze(0).to(self.device)
         return rh_mano, rh_faces
 
     def get_hand_pc(self, pose, m_rot, tran=None):
@@ -145,9 +140,7 @@ class DCoGModel:
         hand_pc = torch.bmm(hand_pc, m_rot)
         select_finger_index = self.finger_index[init_move_finger_idx]
         concat_center = concat_center[init_move_finger_idx].repeat(6, 1)
-        tran = concat_center - hand_pc[:, select_finger_index].mean(
-            dim=1, keepdim=False
-        )
+        tran = concat_center - hand_pc[:, select_finger_index].mean(dim=1, keepdim=False)
         return tran
 
     def cal_Edis(self, obj_pc, obj_cls, hand_pc, select_idx=[1, 2, 3, 4, 5]):
@@ -165,9 +158,7 @@ class DCoGModel:
     def cal_Edct(self, obj_pc, obj_cls, hand_pc):
         if self.hand_normal is None:
             mesh = Meshes(verts=hand_pc, faces=self.rh_faces[: hand_pc.shape[0]])
-            self.hand_normal = (
-                mesh.verts_normals_packed().view(-1, 778, 3).to(self.device)
-            )
+            self.hand_normal = mesh.verts_normals_packed().view(-1, 778, 3).to(self.device)
 
         E = 0
         for fingerId, ft_idx in self.tip_index.items():
@@ -187,9 +178,7 @@ class DCoGModel:
     def cal_Edcf(self, obj_pc, hand_pc):
         if self.hand_normal is None:
             mesh = Meshes(verts=hand_pc, faces=self.rh_faces[: hand_pc.shape[0]])
-            self.hand_normal = (
-                mesh.verts_normals_packed().view(-1, 778, 3).to(self.device)
-            )
+            self.hand_normal = mesh.verts_normals_packed().view(-1, 778, 3).to(self.device)
 
         finger_index_all = []
         for _, ft_idx in self.finger_index.items():
@@ -210,11 +199,13 @@ class DCoGModel:
         obj_pc = obj_pc.T
         obj_pc = obj_pc.repeat(hand_pc.shape[0], 1, 1)
         net_pred, _ = self.sup_net(obj_pc, hand_pc)
-        E = torch.nn.functional.cross_entropy(
-            net_pred,
-            torch.ones((net_pred.shape[0]), dtype=torch.long).to(net_pred.device),
-            reduction="sum",
-        )
+        # E = torch.nn.functional.cross_entropy(
+        #     net_pred,
+        #     torch.ones((net_pred.shape[0]), dtype=torch.long).to(net_pred.device),
+        #     reduction="sum",
+        # )
+        net_pred_softmax = torch.softmax(net_pred, 1)
+        E = -torch.log(net_pred_softmax[:, 1]).sum()
         return E / obj_pc.shape[0]
 
     def cal_Epen(self, obj_pc, hand_pc, reuturn_batch=False):
@@ -228,9 +219,7 @@ class DCoGModel:
         """
         if self.hand_normal is None:
             mesh = Meshes(verts=hand_pc, faces=self.rh_faces[: hand_pc.shape[0]])
-            self.hand_normal = (
-                mesh.verts_normals_packed().view(-1, 778, 3).to(self.device)
-            )
+            self.hand_normal = mesh.verts_normals_packed().view(-1, 778, 3).to(self.device)
         obj_pc = obj_pc.repeat(hand_pc.shape[0], 1, 1)
         B = hand_pc.size(0)
         nn_dist, nn_idx, _ = knn_points(obj_pc, hand_pc)
