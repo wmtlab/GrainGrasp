@@ -51,7 +51,7 @@ The configurations for the experiments can be found and modified in [config.json
 
 
 
-## Cation
+## Citation
 
 ```
 @misc{zhao2024graingrasp,
