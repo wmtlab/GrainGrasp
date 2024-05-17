@@ -1,5 +1,5 @@
 # GrainGrasp
-### GrainGrasp: Dexterous Grasp Generation with Fine-grained Contact Guidance
+### [GrainGrasp: Dexterous Grasp Generation with Fine-grained Contact Guidance](https://arxiv.org/abs/2405.09310)
 
 ## Requirements:
 The ```Python``` version for this project is ```3.9.18```.  
@@ -51,4 +51,15 @@ The configurations for the experiments can be found and modified in [config.json
 
 
 
+## Cation
 
+```
+@misc{zhao2024graingrasp,
+      title={GrainGrasp: Dexterous Grasp Generation with Fine-grained Contact Guidance}, 
+      author={Fuqiang Zhao and Dzmitry Tsetserukou and Qian Liu},
+      year={2024},
+      eprint={2405.09310},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO}
+}
+```
