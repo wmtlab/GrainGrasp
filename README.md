@@ -54,12 +54,14 @@ The configurations for the experiments can be found and modified in [config.json
 ## Citation
 
 ```
-@misc{zhao2024graingrasp,
-      title={GrainGrasp: Dexterous Grasp Generation with Fine-grained Contact Guidance}, 
-      author={Fuqiang Zhao and Dzmitry Tsetserukou and Qian Liu},
-      year={2024},
-      eprint={2405.09310},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO}
-}
+@INPROCEEDINGS{10610035,
+  author={Zhao, Fuqiang and Tsetserukou, Dzmitry and Liu, Qian},
+  booktitle={2024 IEEE International Conference on Robotics and Automation (ICRA)}, 
+  title={GrainGrasp: Dexterous Grasp Generation with Fine-grained Contact Guidance}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={6470-6476},
+  keywords={Point cloud compression;Codes;Accuracy;Shape;Optimization methods;Grasping;Predictive models},
+  doi={10.1109/ICRA57147.2024.10610035}}
 ```
