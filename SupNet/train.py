@@ -153,17 +153,23 @@ if __name__ == "__main__":
         obj_pc_path = "Data/processed/{}/{}/obj_pc".format(cfg.K, "train")
         hand_pc_path = "Data/processed/{}/{}/hand_pc".format(cfg.K, "train")
         train_dataset = obman(obj_pc_path, hand_pc_path)
-        train_loader = DataLoader(dataset=train_dataset, batch_size=cfg.batch_size, shuffle=True, num_workers=cfg.dataloader_workers)
+        train_loader = DataLoader(
+            dataset=train_dataset, batch_size=cfg.batch_size, shuffle=True, num_workers=cfg.dataloader_workers
+        )
     if "Val" in cfg.train_mode:
         obj_pc_path = "Data/processed/{}/{}/obj_pc".format(cfg.K, "val")
         hand_pc_path = "Data/processed/{}/{}/hand_pc".format(cfg.K, "val")
         val_dataset = obman(obj_pc_path, hand_pc_path)
-        val_loader = DataLoader(dataset=val_dataset, batch_size=cfg.batch_size, shuffle=False, num_workers=cfg.dataloader_workers)
+        val_loader = DataLoader(
+            dataset=val_dataset, batch_size=cfg.batch_size, shuffle=False, num_workers=cfg.dataloader_workers
+        )
     if "Test" in cfg.train_mode:
         obj_pc_path = "Data/processed/{}/{}/obj_pc".format(cfg.K, "test")
         hand_pc_path = "Data/processed/{}/{}/hand_pc".format(cfg.K, "test")
         eval_dataset = obman(obj_pc_path, hand_pc_path)
-        eval_loader = DataLoader(dataset=eval_dataset, batch_size=cfg.batch_size, shuffle=False, num_workers=cfg.dataloader_workers)
+        eval_loader = DataLoader(
+            dataset=eval_dataset, batch_size=cfg.batch_size, shuffle=False, num_workers=cfg.dataloader_workers
+        )
 
     # optimizer
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=cfg.learning_rate)
@@ -185,4 +191,4 @@ if __name__ == "__main__":
             best_val_acc = val(cfg, epoch, model, val_loader, device, log_root, save_root, best_val_acc, "val")
         if "Test" in cfg.train_mode:
             print("Begin Test epoch={}".format(epoch))
-            best_val_acc = val(cfg, epoch, model, val_loader, device, log_root, save_root, best_val_acc, "test")
+            best_val_acc = val(cfg, epoch, model, eval_loader, device, log_root, save_root, best_val_acc, "test")
